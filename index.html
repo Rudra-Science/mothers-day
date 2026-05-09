@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Mother's Day</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+
+        :root{
+            --hero-grad: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            --wisdom-grad: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+            --pink-grad: linear-gradient(to top, #ff9a9e 0%, #fecfef 100%);
+            --glass-white: rgba(255,255,255,0.88);
+            --deep-blue: #2c3e50;
+            --cyan: #008b8b;
+        }
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            font-family: 'Poppins', sans-serif;
+            background: #f5fcff;
+            color: var(--deep-blue);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1,h2,h3{
+            font-family: 'Playfair Display', serif;
+        }
+
+        .container{
+            width: 88%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* HERO */
+
+        .hero{
+            min-height: 100vh;
+            background: var(--hero-grad);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            padding: 40px 20px;
+        }
+
+        .hero::before{
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(255,255,255,0.15) 2px, transparent 2px);
+            background-size: 45px 45px;
+        }
+
+        .hero-content{
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-img{
+            width: 230px;
+            height: 230px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid rgba(255,255,255,0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+            margin-bottom: 25px;
+        }
+
+        .hero h1{
+            font-size: 4rem;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .hero-quote{
+            max-width: 700px;
+            margin: auto;
+            font-size: 1.3rem;
+            font-style: italic;
+            opacity: 0.96;
+        }
+
+        /* RECIPE SECTION */
+
+        .recipe-section{
+            padding: 100px 0;
+            background: white;
+        }
+
+        .recipe-grid{
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+            gap: 60px;
+            align-items: center;
+        }
+
+        .recipe-text h2{
+            color: var(--cyan);
+            margin-bottom: 30px;
+            font-size: 2.4rem;
+        }
+
+        .recipe-text ul{
+            list-style: none;
+        }
+
+        .recipe-text li{
+            margin-bottom: 18px;
+            background: #f8fdff;
+            padding: 18px;
+            border-left: 5px solid #4facfe;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.04);
+        }
+
+        .recipe-image{
+            height: 550px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+
+        .recipe-image img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* WISDOM WALL */
+
+        .wisdom-wall{
+            padding: 100px 20px;
+            background: var(--pink-grad);
+            text-align: center;
+        }
+
+        .wisdom-wall h2{
+            font-size: 2.8rem;
+            margin-bottom: 50px;
+        }
+
+        .quote-grid{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .quote-card{
+            width: 320px;
+            padding: 40px 30px;
+            background: var(--glass-white);
+            border-radius: 24px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 10px 25px rgba(255,154,158,0.25);
+            font-style: italic;
+            transition: transform 0.4s ease;
+        }
+
+        .quote-card:hover{
+            transform: translateY(-10px);
+        }
+
+        /* GALLERY SLIDER */
+
+        .gallery{
+            padding: 100px 5%;
+            background: white;
+        }
+
+        .gallery h2{
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 50px;
+        }
+
+        .slider{
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            height: 600px;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 28px;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+        }
+
+        .slides{
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .slide.active{
+            opacity: 1;
+        }
+
+        .nav{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 55px;
+            height: 55px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.75);
+            color: #2c3e50;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: 0.3s ease;
+        }
+
+        .nav:hover{
+            background: white;
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .prev{
+            left: 20px;
+        }
+
+        .next{
+            right: 20px;
+        }
+
+        /* FOOTER */
+
+        footer{
+            background: var(--deep-blue);
+            color: #eafcff;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        footer small{
+            letter-spacing: 1px;
+            font-size: 0.95rem;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:768px){
+
+            .hero h1{
+                font-size: 2.7rem;
+            }
+
+            .hero-quote{
+                font-size: 1.05rem;
+            }
+
+            .hero-img{
+                width: 180px;
+                height: 180px;
+            }
+
+            .recipe-image{
+                height: 400px;
+            }
+
+            .slider{
+                height: 350px;
+            }
+
+            .gallery h2{
+                font-size: 2.2rem;
+            }
+
+            .nav{
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+
+    <header class="hero">
+
+        <div class="hero-content">
+
+            <img src="starter.jpg" alt="Mom" class="hero-img">
+
+            <h1>Happy Mother's Day</h1>
+
+            <p class="hero-quote">
+                "The one who matches every note in a harmony,
+                hits the perfect note every time and is the cable
+                that connects my failed life to success."
+            </p>
+
+        </div>
+
+    </header>
+
+    <!-- RECIPE SECTION -->
+
+    <section class="recipe-section">
+
+        <div class="container">
+
+            <div class="recipe-grid">
+
+                <div class="recipe-text">
+
+                    <h2>The Recipe for a Great Mom</h2>
+
+                    <ul>
+
+                        <li>
+                            <strong>💙 Pure Devotion:</strong>
+                            1 Kilo-Litre of Unconditional Love
+                        </li>
+
+                        <li>
+                            <strong>☁️ Endless Calm:</strong>
+                            An overflowing tablespoon of patience
+                        </li>
+
+                        <li>
+                            <strong>✨ Wisdom:</strong>
+                            1 trillion cups of knowledge and advice
+                        </li>
+
+                        <li>
+                            <strong>🌸 Kindness:</strong>
+                            A trillion bottles of joy and forgiveness
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="recipe-image">
+
+                    <img src="image_90c481.jpg" alt="Mom Picture">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- WISDOM WALL -->
+
+    <section class="wisdom-wall">
+
+        <div class="container">
+
+            <h2>The Wisdom Wall</h2>
+
+            <div class="quote-grid">
+
+                <div class="quote-card">
+                    "Pahunchte he call kar dena!"
+                    <br>
+                    (Call when you reach)
+                </div>
+
+                <div class="quote-card">
+                    "Der raat tak nahi uthte hai! Ab soo jao!"
+                    <br>
+                    (Go sleep, don't stay awake this late)
+                </div>
+
+                <div class="quote-card">
+                    "Cart me add kardo, me order kar dungi!"
+                    <br>
+                    (Add it to the cart, I'll order it)
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- GALLERY -->
+
+    <section class="gallery">
+
+        <div class="container">
+
+            <h2>Moments We Cherish</h2>
+
+            <div class="slider">
+
+                <div class="slides">
+
+                    <img src="image_90bd60.jpg" alt="Memory 1" class="slide active">
+
+                    <img src="image_90bd61.jpg" alt="Memory 2" class="slide">
+
+                    <img src="image_90bd62.jpg" alt="Memory 3" class="slide">
+
+                    <img src="image_90bd63.jpg" alt="Memory 4" class="slide">
+
+                </div>
+
+                <button class="nav prev">&#10094;</button>
+                <button class="nav next">&#10095;</button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- GRATITUDE JAR SECTION -->
+
+<section class="gratitude-section">
+
+    <div class="container">
+
+        <h2 class="jar-heading">The Gratitude Jar</h2>
+
+        <p class="jar-subtext">
+            Tap the jar to open a random thank-you note 💌
+        </p>
+
+        <!-- JAR -->
+
+        <div class="jar-wrapper">
+
+            <div class="jar" id="gratitudeJar">
+
+                <!-- Lid -->
+                <div class="jar-lid"></div>
+
+                <!-- Notes inside -->
+                <div class="note note1"></div>
+                <div class="note note2"></div>
+                <div class="note note3"></div>
+                <div class="note note4"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- POPUP OVERLAY -->
+
+<div class="gratitude-overlay" id="overlay">
+
+    <div class="gratitude-note" id="gratitudeNote">
+
+        <p id="noteText"></p>
+
+    </div>
+
+</div>
+
+<style>
+
+/* GRATITUDE SECTION */
+
+.gratitude-section{
+    padding: 120px 20px;
+    background: linear-gradient(
+        180deg,
+        #f7feff 0%,
+        #eefcff 100%
+    );
+    text-align: center;
+    overflow: hidden;
+}
+
+.jar-heading{
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.jar-subtext{
+    font-family: 'Poppins', sans-serif;
+    color: #557;
+    margin-bottom: 60px;
+    font-size: 1.05rem;
+}
+
+/* JAR WRAPPER */
+
+.jar-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* JAR */
+
+.jar{
+    position: relative;
+    width: 220px;
+    height: 300px;
+    cursor: pointer;
+    border-radius: 40px 40px 55px 55px;
+
+    background: rgba(255,255,255,0.28);
+
+    backdrop-filter: blur(14px);
+
+    border: 3px solid rgba(255,255,255,0.45);
+
+    box-shadow:
+        inset 0 0 25px rgba(255,255,255,0.5),
+        0 20px 45px rgba(79,172,254,0.2);
+
+    transition: transform 0.35s ease;
+}
+
+.jar:hover{
+    transform: scale(1.05) rotate(-1deg);
+}
+
+/* JAR LID */
+
+.jar-lid{
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 170px;
+    height: 45px;
+    border-radius: 20px;
+
+    background: linear-gradient(
+        135deg,
+        #00f2fe 0%,
+        #4facfe 100%
+    );
+
+    box-shadow: 0 10px 25px rgba(0,242,254,0.25);
+}
+
+/* NOTES */
+
+.note{
+    position: absolute;
+    width: 70px;
+    height: 50px;
+    background: linear-gradient(
+        135deg,
+        #fff 0%,
+        #ffeef5 100%
+    );
+
+    border-radius: 10px;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+}
+
+.note::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    background: rgba(255,255,255,0.7);
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+.note1{
+    top: 70px;
+    left: 35px;
+    transform: rotate(-12deg);
+}
+
+.note2{
+    top: 110px;
+    right: 40px;
+    transform: rotate(10deg);
+}
+
+.note3{
+    bottom: 75px;
+    left: 55px;
+    transform: rotate(8deg);
+}
+
+.note4{
+    bottom: 50px;
+    right: 45px;
+    transform: rotate(-8deg);
+}
+
+/* OVERLAY */
+
+.gratitude-overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(10,20,30,0.45);
+
+    backdrop-filter: blur(8px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: 0.35s ease;
+
+    z-index: 9999;
+    padding: 20px;
+}
+
+.gratitude-overlay.active{
+    opacity: 1;
+    visibility: visible;
+}
+
+/* NOTE POPUP */
+
+.gratitude-note{
+    max-width: 420px;
+    width: 100%;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #fff8fb 100%
+    );
+
+    border-radius: 24px;
+
+    padding: 40px 30px;
+
+    text-align: center;
+
+    box-shadow: 0 25px 55px rgba(0,0,0,0.18);
+
+    font-family: 'Poppins', sans-serif;
+
+    color: #2c3e50;
+
+    position: relative;
+
+    transform: scale(0.7) rotate(-6deg);
+
+    animation: none;
+}
+
+.gratitude-overlay.active .gratitude-note{
+    animation: popIn 0.45s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
+.gratitude-note p{
+    font-size: 1.15rem;
+    line-height: 1.8;
+}
+
+/* POP ANIMATION */
+
+@keyframes popIn{
+
+    0%{
+        transform: scale(0.6) rotate(-10deg);
+        opacity: 0;
+    }
+
+    70%{
+        transform: scale(1.05) rotate(3deg);
+        opacity: 1;
+    }
+
+    100%{
+        transform: scale(1) rotate(-2deg);
+        opacity: 1;
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .jar-heading{
+        font-size: 2.3rem;
+    }
+
+    .jar{
+        width: 180px;
+        height: 250px;
+    }
+
+    .jar-lid{
+        width: 140px;
+    }
+
+    .gratitude-note{
+        padding: 35px 24px;
+    }
+
+    .gratitude-note p{
+        font-size: 1rem;
+    }
+
+    .note{
+        width: 58px;
+        height: 42px;
+    }
+}
+
+</style>
+
+<script>
+
+/* GRATITUDE MESSAGES */
+
+const gratitudeMessages = [
+
+    "Thank you for the best Paneer and Naan nights at home! 🥘",
+
+    "Thank you for always encouraging my Guitar practice. 🎸",
+
+    "Thank you for being the gravity that keeps our family in Bilhari grounded. ⚛️",
+
+    "Thank you for the extra mill/coffee while I'm studying☕",
+
+    "Thank you for making our home in Jabalpur so warm and happy. 🏠",
+
+    "Thank you for being the root note of my life's melody. 🎵",
+
+    "Thank you for your infinite patience with me. ✨",
+
+    "Thank you for always reminding me to sleep when I study late for Science! 🌙",
+
+    "Thank you for believing in me even when the Physics gets tough. ⚛️",
+
+    "Thank you for your quiet strength that holds us all together. 💪",
+
+    "Thank you for the hugs that make everything okay. 🤗",
+
+    "Thank you for the love you put into every small thing. 🌸",
+
+    "Thank you for being my constant North Star. 🌟",
+
+    "Thank you for supporting my school music performances. 🎸",
+
+    "Thank you for making every ordinary day feel special. 💖",
+
+    "You are the universal constant in my chaotic world. ⚛️",
+
+    "Like gravity, your love keeps me grounded no matter how high I fly.",
+
+    "Thank you for being the prism that turns my ordinary light into a rainbow. 🌈",
+
+    "Your patience is the only thing that successfully defies the laws of entropy.",
+
+    "Thank you for being the thermal energy that keeps our home so warm. 🔥",
+
+    "You are the focal point that brings my blurry world into sharp 4K view.",
+
+    "A mother’s love is like a photon: weightless, yet it fills the whole universe with light.",
+
+    "Thank you for being the 'Strong Force' that holds my atoms together. ⚛️",
+
+    "Your support is the friction that keeps me from slipping when life gets steep.",
+
+    "You are the absolute zero—the coolest person I will ever know. ❄️",
+
+    "Thank you for the kinetic energy you put into making every day special.",
+
+    "Our bond is quantum entangled; I feel your love no matter the distance.",
+
+    "You are the Grand Unified Theory that makes our family make sense.",
+
+    "Thank you for being the catalyst for all my best reactions. 🧪",
+
+    "Your voice is the frequency that perfectly resonates with my soul.",
+
+    "Thank you for being the 'clean tone' when my life feels a bit distorted. 🎸",
+
+    "You are the root note that every melody in my life is built on. 🎵",
+
+    "Thank you for always being the front-row audience for my new guitar riffs.",
+
+    "You are the perfect harmony to my loudest, messiest chords. 🎼",
+
+    "Thank you for being the rhythm that keeps me from missing a beat.",
+
+    "A mother’s love is the ultimate sustain pedal—it never fades away.",
+
+    "Thank you for the masterpiece of a life you've composed for us.",
+
+    "You are the bridge that connects my wildest dreams to reality. 🌉",
+
+    "Thank you for never telling me to 'turn it down' when I'm chasing a dream.",
+
+    "You are the soul of our family’s soundtrack. 🎧",
+
+    "Like a perfectly tuned Stratocaster, you always bring the best vibes. 🎸",
+
+    "Thank you for the lyrics of wisdom you've given me over the years.",
+
+    "You are the crescendo in all my happiest moments. 📈",
+
+    "Thank you for teaching me that life is better when played with heart.",
+
+    "You are my favorite song on repeat. 🔁",
+
+    "Thank you for the endless supply of the world's best Paneer and Naan! 🥘",
+
+    "Thank you for the 'secret recipes' that taste like pure love. 🥣",
+
+    "Thank you for the kitchen talks that solve all my problems.",
+
+    "You turn a simple house into a sanctuary of peace. 🏠",
+
+    "Thank you for the comfort food that heals my soul every single time.",
+
+    "Your handmade meals are the only luxury I ever truly need. ✨",
+
+    "Thank you for the magic you put into every single bite.",
+
+    "Thank you for the hugs that have the power to reset a bad day. 🤗",
+
+    "You are my first teacher, my best friend, and my forever hero.",
+
+    "Thank you for your quiet strength that holds us all together. 💪",
+
+    "You are the 'User Manual' for life that I actually want to read.",
+
+    "Thank you for believing in me even when I’m still figuring things out.",
+
+    "You make 'doing it all' look like an effortless art form. 🎨",
+
+    "Thank you for the love you put into every small, 'invisible' detail.",
+
+    "You are the North Star I use to find my way back home. 🌟",
+
+    "Thank you for the billion little things you do that go unsaid.",
+
+    "If love had a face, it would definitely look like your smile. 😊",
+
+    "Thank you for your infinite forgiveness and your even bigger heart.",
+
+    "You are simply the best version of a human being I’ve ever met.",
+
+];
+
+/* ELEMENTS */
+
+const jar = document.getElementById("gratitudeJar");
+
+const overlay = document.getElementById("overlay");
+
+const noteText = document.getElementById("noteText");
+
+
+/* OPEN NOTE */
+
+jar.addEventListener("click", () => {
+
+    const randomMessage =
+        gratitudeMessages[
+            Math.floor(Math.random() * gratitudeMessages.length)
+        ];
+
+    noteText.textContent = randomMessage;
+
+    overlay.classList.add("active");
+
+});
+
+
+/* CLOSE NOTE */
+
+overlay.addEventListener("click", () => {
+
+    overlay.classList.remove("active");
+
+});
+
+</script>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <small>MADE WITH ❤️ BY RUDRA</small>
+
+    </footer>
+
+    <!-- SCRIPT -->
+
+    <script>
+
+        /* SCROLL ANIMATION */
+
+        const observer = new IntersectionObserver((entries) => {
+
+            entries.forEach(entry => {
+
+                if(entry.isIntersecting){
+
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+
+            });
+
+        }, { threshold: 0.1 });
+
+
+        document.querySelectorAll(
+            '.quote-card, .recipe-text li, .slider'
+        ).forEach(el => {
+
+            el.style.opacity = "0";
+            el.style.transform = "translateY(30px)";
+            el.style.transition =
+                "all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)";
+
+            observer.observe(el);
+
+        });
+
+
+        /* IMAGE SLIDER */
+
+        const slides = document.querySelectorAll(".slide");
+
+        const nextBtn = document.querySelector(".next");
+        const prevBtn = document.querySelector(".prev");
+
+        let current = 0;
+
+        function showSlide(index){
+
+            slides.forEach(slide => {
+                slide.classList.remove("active");
+            });
+
+            slides[index].classList.add("active");
+        }
+
+        nextBtn.addEventListener("click", () => {
+
+            current++;
+
+            if(current >= slides.length){
+                current = 0;
+            }
+
+            showSlide(current);
+        });
+
+        prevBtn.addEventListener("click", () => {
+
+            current--;
+
+            if(current < 0){
+                current = slides.length - 1;
+            }
+
+            showSlide(current);
+        });
+
+        /* AUTO SLIDE */
+
+        setInterval(() => {
+
+            current++;
+
+            if(current >= slides.length){
+                current = 0;
+            }
+
+            showSlide(current);
+
+        }, 4000);
+
+
+
+         const revealElements = document.querySelectorAll(`
+        .hero-content,
+        .recipe-text li,
+        .recipe-image,
+        .quote-card,
+        .slider
+    `);
+
+    revealElements.forEach(el => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(60px)";
+        el.style.transition = "all 1s cubic-bezier(0.22, 1, 0.36, 1)";
+    });
+
+    const revealOnScroll = new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
+
+            }
+
+        });
+
+    }, {
+        threshold: 0.15
+    });
+
+    revealElements.forEach(el => {
+        revealOnScroll.observe(el);
+    });
+
+
+    // Disable Right-Click
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+// Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+document.onkeydown = function(e) {
+    if (e.keyCode == 123) { // F12
+        return false;
+    }
+    if (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) {
+        return false;
+    }
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { // View Source
+        return false;
+    }
+};
+
+setInterval(function() {
+    debugger;
+}, 100);
+
+// 1. Kill Text Selection
+document.onselectstart = function() { 
+    return false; 
+};
+
+// 2. Kill Image/Element Dragging
+document.ondragstart = function() { 
+    return false; 
+};
+
+// 3. (Optional) Mobile Long-Press Fix
+// Stops the "Copy/Select" menu from popping up on mobile
+window.oncontextmenu = function(event) {
+     event.preventDefault();
+     event.stopPropagation();
+     return false;
+};
+    </script>
+
+</body>
+
+</html>
